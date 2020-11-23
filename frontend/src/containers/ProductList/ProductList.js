@@ -8,50 +8,34 @@ import { products } from '../../data/productsData';
 class ProductList extends Component {
 
     state = {
-        colValue: 'col-lg-4',
-        perPage: 12,
+        colValue: 'col-lg-3',
+        perPage: 8,
         currentPage: 1,
         pagesToShow: 3,
-        gridValue: 3
+        gridValue: 4
     };
 
-    // changeLayout = (n) => {
-    //     this.setState({gridValue: n});
 
-    //     let realGridValue;
-
-    //     if(n === 4) {
-    //         realGridValue = 3
-    //     } else {
-    //         realGridValue = 4;
-    //     }
-
-    //   this.setState({
-    //       colValue: `col-lg-${realGridValue}`
-    //   });
-    // };
+    onPrev = () => {
+        const updatedState = {...this.state};
+        updatedState.currentPage = this.state.currentPage - 1;
+        this.setState(updatedState);
+    };
 
 
-    // onPrev = () => {
-    //     const updatedState = {...this.state};
-    //     updatedState.currentPage = this.state.currentPage - 1;
-    //     this.setState(updatedState);
-    // };
+    onNext = () => {
+        this.setState({
+            ...this.state,
+            currentPage: this.state.currentPage + 1
+        });
+    };
 
-
-    // onNext = () => {
-    //     this.setState({
-    //         ...this.state,
-    //         currentPage: this.state.currentPage + 1
-    //     });
-    // };
-
-    // goPage = (n) => {
-    //     this.setState({
-    //         ...this.state,
-    //         currentPage: n
-    //     });
-    // };
+    goPage = (n) => {
+        this.setState({
+            ...this.state,
+            currentPage: n
+        });
+    };
 
 
     render() {
@@ -59,7 +43,7 @@ class ProductList extends Component {
         let isActive = this.state.colValue[this.state.colValue.length - 1];
 
         return (
-            <div className="col-lg-9">
+            <div className="col-lg-12">
                 {/* <div className="row mb-3">
                     <div className="col-12 d-none d-lg-block d-xl-block">
                         <div className="card ">

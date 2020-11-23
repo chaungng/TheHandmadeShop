@@ -7,22 +7,22 @@ const CategoryNavBar = () => {
             <div className="container">
                 <ul className="navbar-nav ml-auto mx-auto">
                     <li className="nav-item ml-5 mr-5">
-                        <NavLink className="nav-link" to={"/new"}>New</NavLink>
+                        <NavLink className="nav-link" to={"/products/face"}>Face</NavLink>
                     </li>
                     <li className="nav-item ml-5 mr-5">
-                        <NavLink className="nav-link" to={"/face"}>Face</NavLink>
+                        <NavLink className="nav-link" to={"/products/hands"}>Hands</NavLink>
                     </li>
                     <li className="nav-item ml-5 mr-5">
-                        <NavLink className="nav-link" to={"/hand"}>Hand</NavLink>
+                        <NavLink className="nav-link" to={"/products/body"}>Body</NavLink>
                     </li>
                     <li className="nav-item ml-5 mr-5">
-                        <NavLink className="nav-link" to={"/body"}>Body</NavLink>
+                        <NavLink className="nav-link" to={"/products/hair"}>Hair</NavLink>
                     </li>
                     <li className="nav-item ml-5 mr-5">
-                        <NavLink className="nav-link" to={"/hair"}>Hair</NavLink>
+                        <NavLink className="nav-link" to={"/products/lips"}>Lips</NavLink>
                     </li>
                     <li className="nav-item ml-5 mr-5">
-                        <NavLink className="nav-link" to={"/lips"}>Lips</NavLink>
+                        <NavLink className="nav-link" to={"/products/all"}>All</NavLink>
                     </li>
                 </ul>
             </div>

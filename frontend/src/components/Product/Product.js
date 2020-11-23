@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addProductToCart } from '../../actions';
 import { cumulativeOffSet } from '../../utilities/cumulativeOffset';
+import SlideDots from './../SlideDots/SlideDots';
 import './Product.scss';
 
 const Product = (props) => {
     const {
         id,
-        title,
+        name,
         price,
         images,
         description
@@ -64,12 +65,13 @@ const Product = (props) => {
             onMouseOut={handleMouseOut}
             onTouchMove={handleImageChange}
             onTouchEnd={handleMouseOut}
-            className="card-img-top product__img" src={image} alt={title} ref={imageRef} />
-            {/* <SlideDots len={images.length} activeItem={aItem} changeItem={changeImage} /> */}
+            className="card-img-top product__img" src={image} alt={name} ref={imageRef} />
+            
+            <SlideDots len={images.length} activeItem={oneItem} changeItem={changeImage} />
         </Link>
         <div className="card-body product__text">
             <h4 className="card-title product__title">
-                <Link to={`/products/${id}`}>{title}</Link>
+                <Link to={`/products/${id}`}>{name}</Link>
             </h4>
             <h5 className="product__price">{price}</h5>
             <p className="card-text product__description">{description}</p>

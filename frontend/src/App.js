@@ -6,8 +6,8 @@ import './App.css';
 import { store } from './store/store'
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import ProductList from './containers/ProductList/ProductList';
-
+import HomePage from './pages/HomePage/HomePage';
+import ProductDetailPage from './pages/ProductDetailPage/ProductDetailPage';
 
 function App() {
   return (
@@ -16,14 +16,17 @@ function App() {
         <React.Fragment>
           <Header />
           <Switch>
-            {/* <Route exact path={'/'} render={() => {
-                    return <Redirect to={'/products'}/>
-                }}/>
-                <Route exact path={'/products'} component={Home}/>
-                <Route exact path={'/products/:id'} component={ProductDetail}/>
-                <Route exact patr={'/cart'} component={ShoppingCart}/> */}
+            <Route exact path={'/'} render={() => {
+              return <Redirect to={'/products'} />
+            }} />
+
+            <Route exact path={'/products'} component={HomePage} />
+            <Route exact path={'/products/all'} render={() => {
+              return <Redirect to={'/products'} />
+            }} />
+            <Route exact path={'/products/:id'} component={ProductDetailPage} />
+            {/* <Route exact patr={'/cart'} component={ShoppingCart}/> */}
           </Switch>
-          <ProductList />
           <Footer />
         </React.Fragment>
       </BrowserRouter>
