@@ -12,7 +12,7 @@ const Product = (props) => {
         name,
         price,
         images,
-        description
+        volume
     } = props.product;
 
     const imageRef = React.createRef();
@@ -74,7 +74,7 @@ const Product = (props) => {
                 <Link to={`/products/${id}`}>{name}</Link>
             </h4>
             <h5 className="product__price">{price}</h5>
-            <p className="card-text product__description">{description}</p>
+            <p className="card-text product__description">{volume}</p>
             <button onClick={() => {
                 props.dispatch(addProductToCart({ ...props.product }))
             }} className="btn btn-info product__add-to-cart">Add to cart</button>

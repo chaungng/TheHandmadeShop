@@ -15,7 +15,6 @@ const ProductDetail = (props) => {
         ingredients,
     } = props.product;
 
-
     const onCart = () => {
         props.dispatch(addProductToCart(props.product));
     };
@@ -45,8 +44,12 @@ const ProductDetail = (props) => {
                     <dt>Ingredients</dt>
                     <dd>{ingredients}</dd>
                 </dl>
-                <hr />
-                <hr />
+                <dl className="param param-feature">
+                    <dt>Quantity</dt>
+                    <dd><input type="number" placeholder="Select quantity" class="form-control" id="quantity"
+                        name="quantity" min="1" /></dd>
+                </dl>
+
                 <button onClick={onCart} className="btn btn-lg btn-outline-primary text-uppercase">
                     <i className="fa fa-shopping-cart" /> Add to cart
                 </button>

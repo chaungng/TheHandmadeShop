@@ -7,7 +7,9 @@ import { store } from './store/store'
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import HomePage from './pages/HomePage/HomePage';
+import CategoryPage from './pages/CategoryPage/CategoryPage';
 import ProductDetailPage from './pages/ProductDetailPage/ProductDetailPage';
+import ShoppingCartPage from './pages/ShoppingCartPage/ShoppingCartPage';
 
 function App() {
   return (
@@ -21,11 +23,13 @@ function App() {
             }} />
 
             <Route exact path={'/products'} component={HomePage} />
-            <Route exact path={'/products/all'} render={() => {
+            <Route exact path={'/category/all'} render={() => {
               return <Redirect to={'/products'} />
             }} />
+            <Route exact path={'/category/:category'} component={CategoryPage} />
             <Route exact path={'/products/:id'} component={ProductDetailPage} />
-            {/* <Route exact patr={'/cart'} component={ShoppingCart}/> */}
+
+            <Route exact path={'/cart'} component={ShoppingCartPage} />
           </Switch>
           <Footer />
         </React.Fragment>
