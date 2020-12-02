@@ -1,23 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addProductToCart } from '../../actions';
 
 const ProductDetail = (props) => {
 
     const {
-        id,
         name,
         category,
         price,
         volume,
-        images,
         description,
         ingredients,
     } = props.product;
 
+    const [productQuantity, setProductQuantity] = useState(0);
+
     const onCart = () => {
-        props.dispatch(addProductToCart(props.product));
+        console.log(props.product);
+        let product = {
+            product: props.product,
+            quantity: productQuantity
+        }
+        props.dispatch(addProductToCart(product));
     };
+
+    const handleQuantityChanged = (e) => {
+        console.log(e.target.value)
+        let qtyNumber = parseInt(e.target.value, 10)
+        setProductQuantity(qtyNumber)
+    }
 
     return (
         <aside className="col-sm-7">
@@ -46,8 +57,8 @@ const ProductDetail = (props) => {
                 </dl>
                 <dl className="param param-feature">
                     <dt>Quantity</dt>
-                    <dd><input type="number" placeholder="Select quantity" class="form-control" id="quantity"
-                        name="quantity" min="1" /></dd>
+                    <dd><input type="number" placeholder="Select quantity" class="form-control" id="quantity" value={productQuantity}
+                        name="quantity" min="1" onChange={handleQuantityChanged} /></dd>
                 </dl>
 
                 <button onClick={onCart} className="btn btn-lg btn-outline-primary text-uppercase">

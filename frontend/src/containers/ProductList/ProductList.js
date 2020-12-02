@@ -37,14 +37,13 @@ class ProductList extends Component {
         });
     };
 
-
     render() {
         return (
             <div className="col-lg-12">
                 <div className="row">
                     {paginationPipe(this.props.products, this.state).map(product => {
                         let classes = `${this.state.colValue} col-md-6 mb-4`;
-                        return (<div className={classes}>
+                        return (<div className={classes} key={product.id}>
                             <Product key={product.id} product={product} />
                         </div>)
                     })}
@@ -66,9 +65,8 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-    // console.log("From Product List");
-    // console.log(state);
-    // console.log(props.category);
+    console.log("From Product List");
+    console.log(state);
 
     const filterByCategoryArr = categoryFilter(state.shop.products, props.category)
 

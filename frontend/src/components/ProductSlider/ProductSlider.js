@@ -21,12 +21,12 @@ const ProductSlider = ({ images }) => {
                         style={{
                             width: '100%',
                             height: '100%'
-                        }}
+                        }} alt={index}
                     /></div>
                 </div>
                 <div className="img-small-wrap">
                     {images.map((img, i) => (
-                        <div className="item-gallery" onClick={() => { changeImage(i) }}><img src={img} /></div>
+                        <div className="item-gallery" onClick={() => { changeImage(i) }}><img src={img} alt={index} /></div>
                     ))}
                 </div>
             </article>

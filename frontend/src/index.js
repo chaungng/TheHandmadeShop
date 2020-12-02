@@ -4,9 +4,17 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import store from './store/store';
+import { fetchProducts } from './reducers/shopReducer'
+import { Provider } from 'react-redux';
+
+store.dispatch(fetchProducts);
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

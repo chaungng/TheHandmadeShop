@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {goPage, nextPage, prevPage} from "../../actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Pagination extends Component {
 
-    onPage(n){
+    onPage(n) {
         this.props.onGoPage(n);
     }
 
-    isOnLastPage(){
+    isOnLastPage() {
         // console.log(this.props.perPage * this.props.currentPage, this.props.totalItemsCount);
         return this.props.perPage * this.props.currentPage >= this.props.totalItemsCount;
     }
@@ -17,7 +16,7 @@ class Pagination extends Component {
         return Math.ceil(this.props.totalItemsCount / this.props.perPage) || 0;
     }
 
-    getMin(){
+    getMin() {
         return ((this.props.perPage * this.props.currentPage) - this.props.perPage) + 1;
     }
 
@@ -33,7 +32,7 @@ class Pagination extends Component {
         this.props.onPrevPage();
     }
 
-    onNext = () =>  {
+    onNext = () => {
         this.props.onNextPage();
     }
 
@@ -64,15 +63,15 @@ class Pagination extends Component {
 
         console.log(this.props);
 
-        const pages =this.getPages().map(pageNum => {
+        const pages = this.getPages().map(pageNum => {
 
             let buttonClass = 'page-item';
 
-            if(pageNum === this.props.currentPage) {
+            if (pageNum === this.props.currentPage) {
                 buttonClass += ' active';
             }
 
-            return (<li className={buttonClass} onClick={() => {this.onPage(pageNum)}}><button className="page-link" >{pageNum}</button></li>);
+            return (<li key={pageNum} className={buttonClass} onClick={() => { this.onPage(pageNum) }}><button className="page-link" key={pageNum}>{pageNum}</button></li>);
         });
 
         let prevButtonClass = 'page-item';
@@ -88,7 +87,7 @@ class Pagination extends Component {
 
         let nextButtonClass = 'page-item';
 
-        if(this.isOnLastPage()) {
+        if (this.isOnLastPage()) {
             nextButtonClass += ' disabled';
         }
 
@@ -99,8 +98,6 @@ class Pagination extends Component {
                     className="page-link" onClick={this.onNext}>Next</button>
             </li>
         );
-
-
 
         return (
             <nav aria-label="...">
@@ -122,4 +119,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default Pagination;
+export default connect(mapStateToProps, null)(Pagination);

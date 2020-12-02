@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ProductSlider from '../../components/ProductSlider/ProductSlider';
-import ProductDetail from '../../components/Product/ProductDetail';
+import ProductDetail from '../../components/ProductDetail/ProductDetail';
 
 const ProductDetailPage = (props) => {
     // console.log("From Product Detail Page");

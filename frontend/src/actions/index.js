@@ -1,3 +1,28 @@
+
+// /**
+//  * Fetch MongoDB Actions
+//  */
+export const FETCH_PRODUCTS_FROM_MONGO = 'FETCH_PRODUCTS_FROM_MONGO';
+export const ADD_ORDER_TO_MONGO = 'ADD_ORDER_TO_MONGO';
+
+export const fetchProductsFromMongo = products => {
+    return {
+        type: FETCH_PRODUCTS_FROM_MONGO,
+        payload: products
+    }
+};
+
+export const addOrderToMongo = order => {
+    return {
+        type: ADD_ORDER_TO_MONGO,
+        payload: order
+    }
+};
+
+
+/**
+ * Product and Cart Item Actions
+ */
 export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 export const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART';
 export const INCREMENT_CART_ITEM_QUANTITY = 'INCREMENT_CART_ITEM_QUANTITY';
@@ -18,20 +43,23 @@ export const removeProductFromCart = productId => {
 };
 
 export const incrementCartQuantity = productId => {
-    return{
+    return {
         type: INCREMENT_CART_ITEM_QUANTITY,
         payload: productId
     }
 };
 
 export const decrementCartQuantity = productId => {
-  return {
-      type: DECREMENT_CART_ITEM_QUANTITY,
-      payload: productId
-  }
+    return {
+        type: DECREMENT_CART_ITEM_QUANTITY,
+        payload: productId
+    }
 };
 
 
+/**
+ * Category Actions
+ */
 export const CHOOSE_CATEGORY_TO_FILTER = 'CHOOSE_CATEGORY_TO_FILTER';
 
 export const chooseCategoryToFilter = category => {
@@ -42,6 +70,9 @@ export const chooseCategoryToFilter = category => {
 };
 
 
+/**
+ * Page Actions
+ */
 export const PREV_PAGE = 'PREV_PAGE';
 export const NEXT_PAGE = 'NEXT_PAGE';
 export const GO_PAGE = 'GO_PAGE';

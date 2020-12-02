@@ -3,7 +3,7 @@ import './SlideDots.scss';
 
 const SlideDots = ({ len, activeItem, changeItem }) => {
     const dots = [];
-    
+
     for (let i = 0; i < len; i++) {
         let dotClass = 'owl-dot';
 
@@ -14,7 +14,7 @@ const SlideDots = ({ len, activeItem, changeItem }) => {
         dots.push(<button
             onClick={() => { changeItem(i) }}
             role="button"
-            className={dotClass}><span></span></button>)
+            className={dotClass} key={i}><span></span></button>)
     }
 
     return (
