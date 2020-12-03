@@ -10,9 +10,12 @@ const Product = (props) => {
     const {
         id,
         name,
+        category,
         price,
         images,
-        volume
+        volume,
+        description,
+        ingredients
     } = props.product;
 
     const imageRef = React.createRef();
@@ -59,6 +62,16 @@ const Product = (props) => {
         setOneItem(i);
     }
 
+    // Function: handle 
+    const onCart = () => {
+        console.log(props.product);
+        let product = {
+            product: props.product,
+            quantity: 1
+        }
+        props.dispatch(addProductToCart(product));
+    };
+
     return (<div className="card h-100 product">
         <Link to={`/products/${id}`} className="product__link"><img
             onMouseMove={handleImageChange}
@@ -66,7 +79,7 @@ const Product = (props) => {
             onTouchMove={handleImageChange}
             onTouchEnd={handleMouseOut}
             className="card-img-top product__img" src={image} alt={name} ref={imageRef} />
-            
+
             <SlideDots len={images.length} activeItem={oneItem} changeItem={changeImage} />
         </Link>
         <div className="card-body product__text">
@@ -75,9 +88,7 @@ const Product = (props) => {
             </h4>
             <h5 className="product__price">{price}</h5>
             <p className="card-text product__description">{volume}</p>
-            <button onClick={() => {
-                props.dispatch(addProductToCart({ ...props.product }))
-            }} className="btn btn-info product__add-to-cart">Add to cart</button>
+            <button onClick={onCart} className="btn btn-info product__add-to-cart">Add to cart</button>
         </div>
     </div>);
 }

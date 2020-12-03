@@ -21,11 +21,11 @@ const ShoppingCart = (props) => {
                 <div className="card-footer">
                     <div className="pull-right" style={{ margin: '10px' }}>
                         <div className="pull-right" style={{ margin: '5px' }}>
-                            Total price: <b>${(props.totalPrice)}</b>
+                            Total price: <b>${props.totalPrice.toFixed(2)}</b>
                         </div>
-                        
+
                         <div className="pull-left" style={{ margin: '5px' }}>
-                            Total items: <b>{(props.cartItemCount)}</b>
+                            Total items: <b>{props.cartItemCount}</b>
                         </div>
                     </div>
                 </div>

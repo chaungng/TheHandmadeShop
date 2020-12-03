@@ -14,7 +14,7 @@ const MainNavBar = ({ cartLength }) => {
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item float-right">
                             <NavLink className="nav-link" to={"/cart"}><i className="fa fa-shopping-cart"
-                                aria-hidden="true" />Cart {cartLength ? `(${cartLength})` : ''} sku</NavLink>
+                                aria-hidden="true" />Cart {cartLength ? `(${cartLength})` : ''} </NavLink>
                         </li>
                     </ul>
                 </div>

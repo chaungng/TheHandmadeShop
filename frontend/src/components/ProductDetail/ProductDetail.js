@@ -27,6 +27,7 @@ const ProductDetail = (props) => {
     const handleQuantityChanged = (e) => {
         console.log(e.target.value)
         let qtyNumber = parseInt(e.target.value, 10)
+        console.log("Quantity " + qtyNumber)
         setProductQuantity(qtyNumber)
     }
 
@@ -57,7 +58,8 @@ const ProductDetail = (props) => {
                 </dl>
                 <dl className="param param-feature">
                     <dt>Quantity</dt>
-                    <dd><input type="number" placeholder="Select quantity" class="form-control" id="quantity" value={productQuantity}
+                    <dd><input type="number" placeholder="Select quantity" class="form-control" id="quantity"
+                        value={productQuantity}
                         name="quantity" min="1" onChange={handleQuantityChanged} /></dd>
                 </dl>
 

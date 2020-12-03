@@ -35,7 +35,8 @@ const shopReducer = (state = initialState, action) => {
             incrementedItem.quantity++;
 
             updatedCart[updatedItemIndex] = incrementedItem;
-
+            
+            console.log("Helloooooooooo" + incrementedItem)
 
             return { ...state, cart: updatedCart };
 
