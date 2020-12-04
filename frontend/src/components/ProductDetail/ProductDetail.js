@@ -16,6 +16,10 @@ const ProductDetail = (props) => {
     const [productQuantity, setProductQuantity] = useState(0);
 
     const onCart = () => {
+        if (productQuantity === 0) {
+            return alert("Please select quantity for your product!");
+        }
+
         console.log(props.product);
         let product = {
             product: props.product,

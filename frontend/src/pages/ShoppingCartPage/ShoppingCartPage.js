@@ -1,9 +1,33 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import { addNewOrder } from '../../reducers/shopReducer';
 import CartItem from "../../components/CartItem/CartItem";
+import { refreshCart } from '../../actions';
 
 const ShoppingCart = (props) => {
     console.log("Shopping Cart props " + props)
+
+    // Dispatch Hook
+    const dispatch = useDispatch()
+
+    // Order button handler
+    const onOrder = () => {
+        const { cartItems, cartItemCount, totalPrice } = props
+
+        if (cartItemCount === 0) {
+            return alert("Please select item before order")
+        }
+
+        let cart = {
+            cartItems: cartItems,
+            cartItemCount: cartItemCount,
+            totalPrice: totalPrice
+        }
+
+        // Save the order to MongoDB
+        dispatch(addNewOrder(cart))
+        dispatch(refreshCart())
+    };
 
     return (
         <div className="container" style={{ paddingTop: '6rem' }}>
@@ -25,10 +49,12 @@ const ShoppingCart = (props) => {
                         </div>
 
                         <div className="pull-left" style={{ margin: '5px' }}>
-                            Total items: <b>{props.cartItemCount}</b>
+                            Number of items: <b>{props.cartItemCount}</b>
                         </div>
                     </div>
                 </div>
+                <button className="btn btn-lg btn-outline-primary text-uppercase" onClick={onOrder}>Order
+                    </button>
             </div>
         </div>
     );
@@ -36,7 +62,7 @@ const ShoppingCart = (props) => {
 
 
 const mapStateToProps = state => {
-    console.log(state, 'ShoppingCartPage: state has changed');
+    // console.log(state, 'ShoppingCartPage: state has changed');
 
     return {
         cartItems: state.shop.cart,
@@ -44,7 +70,9 @@ const mapStateToProps = state => {
             return count + curItem.quantity;
         }, 0),
         totalPrice: state.shop.cart.reduce((count, curItem) => {
-            return count + (curItem.price * curItem.quantity);
+            let total = count + (curItem.price * curItem.quantity)
+            total = +total.toFixed(2)
+            return total;
         }, 0)
     }
 }

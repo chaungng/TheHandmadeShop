@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { fetchProductsFromMongo, addOrderToMongo } from '../actions/index'
+import { fetchProductsFromMongo, addOrderToMongo, refreshCart } from '../actions/index'
 
 import {
     ADD_PRODUCT_TO_CART,
@@ -7,19 +7,20 @@ import {
     INCREMENT_CART_ITEM_QUANTITY,
     REMOVE_PRODUCT_FROM_CART,
     FETCH_PRODUCTS_FROM_MONGO,
-    ADD_ORDER_TO_MONGO
+    ADD_ORDER_TO_MONGO,
+    REFRESH_CART
 } from '../actions';
 
 const initialState = {
     products: [],
-    cart: []
+    cart: [],
+    orders: []
 };
 
 const shopReducer = (state = initialState, action) => {
-    console.log("Shop Reducer: " + state);
-
     let updatedCart;
     let updatedItemIndex;
+    let updatedOrders;
 
     switch (action.type) {
         case INCREMENT_CART_ITEM_QUANTITY:
@@ -35,8 +36,6 @@ const shopReducer = (state = initialState, action) => {
             incrementedItem.quantity++;
 
             updatedCart[updatedItemIndex] = incrementedItem;
-            
-            console.log("Helloooooooooo" + incrementedItem)
 
             return { ...state, cart: updatedCart };
 
@@ -55,8 +54,6 @@ const shopReducer = (state = initialState, action) => {
             decrementedItem.quantity--;
 
             updatedCart[updatedItemIndex] = decrementedItem;
-
-
 
             return { ...state, cart: updatedCart };
 
@@ -93,11 +90,20 @@ const shopReducer = (state = initialState, action) => {
 
             return { ...state, cart: updatedCart };
 
+        case REFRESH_CART:
+            updatedCart = [];
+            return { ...state, cart: updatedCart };
+
         case FETCH_PRODUCTS_FROM_MONGO:
             return { ...state, products: action.payload };
 
         case ADD_ORDER_TO_MONGO:
-            return {};
+            updatedOrders = [...state.orders];
+            updatedOrders.push({ order: action.payload });
+
+            console.log("Updated Orders " + updatedOrders);
+
+            return { ...state, orders: updatedOrders };
 
         default:
             return state;
@@ -107,20 +113,23 @@ const shopReducer = (state = initialState, action) => {
 
 export default shopReducer;
 
+
+// Fetch products from MongoDB
 export async function fetchProducts(dispatch, getState) {
     const response = await axios.get('http://localhost:5000/api/products')
-    console.log(response.data)
+    // console.log(response.data)
     dispatch(fetchProductsFromMongo(response.data))
 }
 
-// Write a synchronous outer function that receives the `text` parameter:
-export function saveNewOrder(text) {
+
+// Write a synchronous outer function that receives the `cart` parameter:
+export function addNewOrder(cart) {
     // And then creates and returns the async thunk function:
     return async function saveNewOrderThunk(dispatch, getState) {
-        // Now we can use the text value and send it to the server
-        const initialOrder = { text }
-        const response = await axios.post('http://localhost:5000/api/order', { order: initialOrder })
-        dispatch(addOrderToMongo(response.order))
+        // Now we can use the cart value and send it to the server
+        const initialOrder = { cart }
+        const response = await axios.post('http://localhost:5000/api/neworder', initialOrder)
+        dispatch(addOrderToMongo(response.data))
     }
 }
 

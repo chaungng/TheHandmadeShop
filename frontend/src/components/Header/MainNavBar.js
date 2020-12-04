@@ -14,7 +14,7 @@ const MainNavBar = ({ cartLength }) => {
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item float-right">
                             <NavLink className="nav-link" to={"/cart"}><i className="fa fa-shopping-cart"
-                                aria-hidden="true" />Cart {cartLength ? `(${cartLength})` : ''} </NavLink>
+                                aria-hidden="true" />Cart {cartLength ? '(*)' : ''} </NavLink>
                         </li>
                     </ul>
                 </div>
@@ -32,3 +32,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, null)(MainNavBar);
+
+// export default connect()(MainNavBar);
