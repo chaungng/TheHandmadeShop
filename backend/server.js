@@ -77,3 +77,35 @@ app.get("/api/products", (req, res) => {
         })
     })
 })
+
+// POST studentinfo to MongoDB
+app.post("/api/neworder", (req, res) => {
+    // console.log(req.body.cart)
+
+    const cartItems = req.body.cart.cartItems
+    const cartItemCount = req.body.cart.cartItemCount
+    const totalPrice = req.body.cart.totalPrice
+
+    // console.log(cartItems, cartItemCount, totalPrice)
+    const myObj = {
+        items: cartItems,
+        quantity: cartItemCount,
+        total: totalPrice
+    }
+
+    MongoClient.connect(mongoUrl, (err, db) => {
+        if (err) throw err
+
+        const dbo = db.db("theHandmadeShopDB")
+        dbo.collection("orders").insertOne(myObj, (error, result) => {
+            if (error) {
+                res.send("Error", error)
+                return;
+            }
+
+            // console.log(result)
+            res.send(result)
+            db.close()
+        })
+    })
+})
